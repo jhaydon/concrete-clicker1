@@ -37,25 +37,12 @@ $(document).ready(function() {
 
     $('#make_btn').bind(bind_type, function(e) { 
         gm.do_make_click();
-        {% if not isapp %}
-        var elc = $('.make_up:first').clone()
-        elc.html('+'+pretty_bigint(gm.get_click_make_amount()));
-        $('#make_div').append(elc);
-        elc.show();
-        elc.offset({left:e.pageX-30, top:e.pageY-50});
-        var end_y = e.clientY-150;
-        elc.css('opacity',100);
-        if(last_float == 1) { 
-            var this_float = e.pageX;
-            last_float = 0;
-        } else { 
             var this_float = e.pageX - 60;
             last_float = 1; 
         }
         elc.animate({'top':end_y.toString()+'px', 'opacity':0, 'left':this_float.toString()+'px'}, 750, function() { 
             $(this).remove();
         });
-        {% endif %}
     });
 
     $('#sell_btn').bind(bind_type, function(e) { 
@@ -63,25 +50,12 @@ $(document).ready(function() {
         if(sale == 0) { 
             return;
         }
-        {% if not isapp %}
-        var elc = $('.sell_up:first').clone()
-        elc.html('$'+pretty_bigint(sale*gm.get_widget_roi()));
-        $('#sell_div').append(elc);
-        elc.show();
-        elc.offset({left:e.pageX-30, top:e.pageY-50});
-        var end_y = e.clientY-150;
-        elc.css('opacity',100);
-        if(last_float == 1) { 
-            var this_float = e.pageX;
-            last_float = 0;
-        } else { 
             var this_float = e.pageX - 60;
             last_float = 1; 
         }
         elc.animate({'top':end_y.toString()+'px', 'opacity':0, 'left':this_float.toString()+'px'}, 750, function() { 
             $(this).remove();
         });
-        {% endif %}
     });
 
     // End actions
