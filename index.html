@@ -13,7 +13,7 @@ var has_loggly = false;
 {% include 'jquery.min.js' %}
 </script>
 <script>
-{% include 'mustache.js' %}
+//{% include 'mustache.js' %}
 </script>
 
 <style type="text/css">
@@ -289,11 +289,6 @@ $(document).ready(function() {
 <div class="sell_up"></div>
 
 {% include "tpls.html" %}
-
-{% if isapp %}
-    <p class="small light_grey">Version {{version}}</p>
-{% else %}
-    {% include "footer.html" %}
-{% endif %}
+    
 </body>
 </html>
