@@ -39,7 +39,7 @@ $(document).ready(function() {
         gm.do_make_click();
             var this_float = e.pageX - 60;
             last_float = 1; 
-        }
+        })
         elc.animate({'top':end_y.toString()+'px', 'opacity':0, 'left':this_float.toString()+'px'}, 750, function() { 
             $(this).remove();
         });
