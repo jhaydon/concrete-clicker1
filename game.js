@@ -40,13 +40,11 @@ var tick_ms = 250;
 {% else %}
 var tick_ms = 100;
 {% endif %}
-//var has_gaq = true;
-
 
 function Game() { 
 
     var pd = {
-        'title':'Clicking Bad',
+        'title':'Concrete Clicker',
         'version':'{{version}}',
         'make_amount':1,
         'make_rps_multiplier':0,
@@ -3348,56 +3346,3 @@ function pretty_int(num) {
     var num_str = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
     return num_str;
 }
-
-// Analytics
-function track_page_view(pg) { 
-    if(has_gaq) {
-        _gaq.push(['_trackPageview',pg]);
-        return true;
-    }
-    return false;
-}
-
-function track_event(category, action, message) {
-    return false;
-    if(has_gaq) { 
-        _gaq.push(['_trackEvent', category, action, message]);
-        return true;
-    } 
-    return false;
-}
-
-function log(type, msg, data) { 
-    var obj = null;
-    if(data) { obj = data; }
-    remote_log({
-        'type':type,
-        'text':msg,
-        'version':'{{version}}',
-        'user_agent':navigator.userAgent,
-        'extra':Base64.encode(JSON.stringify(obj)),
-    });
-    console.log(type.toUpperCase()+': '+msg);
-}
-
-function warning_log(msg, data) { 
-    log('warning',msg,data);
-}
-
-function debug_log(msg, data) { 
-    log('debug',msg,data);
-}
-
-function error_log(msg, data) {
-    log('error',msg,data);
-}
-
-function remote_log(data) {
-    if(has_loggly) { 
-        _LTracker.push(data);
-        return true;
-    }
-    return false;
-}
-
-
