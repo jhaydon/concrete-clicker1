@@ -688,76 +688,6 @@ function Game() {
 
     }
 
-    function fix_banks() {
-        if(active_tab != 'banks') { 
-            return; 
-        }
-
-        $('#bank_rps').html(pretty_bigint(pd.stats.bank_rps));
-        $('#bank_total').html(pretty_bigint(pd.cash.safe));
-        for(var k in pd.banks) {
-            var bn = pd.banks[k];
-            bn.cost = get_item_cost(bn);
-            var el = $('#'+k);
-            var el_btn = $('#'+k+'_btn');
-            var el_sell_btn = $('#'+k+'_sell_btn');
-            var el_lbl = $('#'+k+'_lbl');
-            var el_cst = $('#'+k+'_cst');
-            var el_amt = $('#'+k+'_amt');
-            var el_rps = $('#'+k+'_rps');
-        
-            el_amt.html(pretty_int(bn.amount));
-            el_cst.html(pretty_bigint(bn.cost));
-            el_rps.html(pretty_bigint(bn.rps));
-
-            if((!bn.unlocked)) { 
-                el.addClass('hidden');
-                continue;
-            }
-            
-            if(pd.cash.amount < bn.cost) {
-                el_btn.attr('disabled',true);
-            } else { 
-                el_btn.attr('disabled',false);
-            }
-
-            if(bn.amount < 1) {
-                el_sell_btn.attr('disabled',true);
-            } else { 
-                el_sell_btn.attr('disabled',false);
-            }
-                
-            el.removeClass('hidden');
-        }
-    }
-
-    function fix_risk() { 
-        pd.risk_amount = get_risk();
-        pd.risk2_amount = get_risk2();
-        $('#risk_amount').html(pretty_int(pd.risk_amount * 100)); 
-        $('#risk2_amount').html(pretty_int(pd.risk2_amount * 100));
-        var el_lvl = $('#risk_level');
-        var el_lvl2 = $('#risk2_level');
-        var slvl = false;
-        var slvl2 = false;
-        for(var i=0; i<pd.risk_levels.length; i++) {
-            if((pd.risk_amount < pd.risk_levels[i].level) && (!slvl)) {
-                el_lvl.html(pd.risk_levels[i].label);
-                slvl = true;
-            }
-            if((pd.risk2_amount < pd.risk_levels[i].level) && (!slvl2)) { 
-                el_lvl2.html(pd.risk_levels[i].label);
-                slvl2 = true;
-            }
-        }
-        
-    }
-
-    function fix_saved() { 
-        last_saved += 1;
-        $('#last_saved').html('Game saved '+last_saved+' seconds ago');
-    }
-
     function fix_title() { 
         document.title = '$'+pretty_bigint(pd.cash.amount)+' | '+pd.title;
     }
@@ -996,7 +926,6 @@ function Game() {
         setup_clickers(); 
         setup_sellers();
         setup_upgrades();   
-        setup_banks();
         setup_achievements();
     }
 
@@ -1017,25 +946,6 @@ function Game() {
             //var html = Mustache.to_html(template, data);
             //ac_el.prepend(html);
         }    
-    }
-
-    function setup_banks() {
-       var sortlist = [];
-        for(var k in pd.banks) { 
-            sortlist.push([k, pd.banks[k].cost]);
-        } 
-        var sorted = sortlist.sort(function(x,y) { return x[1] - y[1] });
-        var bn_el = $('#banks');
-        bn_el.html('');
-
-        for(var i in sorted) {
-            var k = sorted[i][0];
-            var bn = pd.banks[k];
-            var template = $('#tpl_bank').html();
-            var data = {'bn':bn, 'id':k};
-            //var html = Mustache.to_html(template, data);
-           // bn_el.prepend(html);
-        }
     }
 
     function setup_clickers() { 
@@ -1140,68 +1050,6 @@ function Game() {
         }
     }
 
-    // Custom Events ---------------------------------------------------------------
-
-    // Meth found, meth per second * r
-    function event_found_meth(r) { 
-        var amt = pd.stats.clicker_rps * r;
-        if(amt < 100) { amt = 100; }
-        pd.widgets.amount += amt;
-        good_message('You found an extra barrel of meth, with '
-            +pretty_bigint(amt)+' batches inside!');
-    }
-
-    // Cash found, cash per second * r
-    function event_found_cash(r) { 
-        var amt = (pd.stats.seller_rps * pd.widget_roi) * r;
-        if(amt < 100) { amt = 100; }
-        earn_cash(amt);
-        if(amt > 10000000000) { 
-            good_message('A mystery benefactor has contributed $'
-                +pretty_bigint(amt)+' to your cause');
-            return;
-        }
-        if(amt > 10000000) { 
-            good_message('You found a truck load of cash, containing $'
-                +pretty_bigint(amt)+' inside!');
-            return;
-        }
-        if(amt > 100000) { 
-            good_message('You found a briefcase with $'+pretty_int(amt)+' inside!');
-            return;
-        }
-        good_message('You found some extra cash hidden in a shoe box, worth $'
-            +pretty_int(amt)+'!');
-    }
-
-/*******************************************************************************
- * Messaging 
- */
-
-function add_message(msg, _type) { 
-    var el = $("<div></div>");
-    el.html(msg);
-    el.addClass(_type);
-    $('#last_message').html($(el).clone().wrap('<p>').parent().html());
-    $('#messages').prepend(el);
-    //el.fadeOut(100000);
-    if($('#messages div').length > 45) { 
-        $('#messages div:last').remove();
-    }
-}
-function error(msg) { 
-    add_message('&#10007; '+msg, 'error');    
-}
-function message(msg) { 
-    add_message('&#9993; '+msg, 'message');
-}
-function good_message(msg) { 
-    add_message('&#9733; '+msg, 'good_message');
-}
-function bad_message(msg) { 
-    add_message('&#10007; '+msg, 'bad_message');
-}
-
 /*******************************************************************************
  * Tab control
  */
@@ -1261,21 +1109,6 @@ function pretty_int(num) {
     var num_str = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
     return num_str;
 }
-
-function Utf8EncodeEnumerator(input)
-{
-    this._input = input;
-    this._index = -1;
-    this._buffer = [];
-}
-
-function Base64DecodeEnumerator(input)
-{
-    this._input = input;
-    this._index = -1;
-    this._buffer = [];
-}
-    }       
 </script>
 </body>
 </html>
