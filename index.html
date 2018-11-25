@@ -2478,13 +2478,7 @@ function Game() {
     }
 
     this.do_sell_click = function() {
-        {% if not isapp %}
-        var nw = (new Date).getTime();
-        if((nw - last_click) < 70) {
-            return false;
-        } 
         last_click = nw;
-        {% endif %}
         var sale = do_sell(this.get_click_sell_amount());
         if(sale) { 
             //message('You sold '+pretty_int(sale)+' '+pd.widgets.label);
