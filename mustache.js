@@ -1,11 +1,3 @@
-{% raw %}
-/*!
- * mustache.js - Logic-less {{mustache}} templates with JavaScript
- * http://github.com/janl/mustache.js
- */
-
-/*global define: false*/
-
 (function (root, factory) {
   if (typeof exports === "object" && exports) {
     factory(exports); // CommonJS
@@ -535,4 +527,3 @@
   };
 
 }));
-{% endraw %}
