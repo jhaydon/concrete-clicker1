@@ -169,14 +169,6 @@ $(document).ready(function() {
         <div id="banks"></div>
     </div>
 
-    <div class="tab_div" id="achievements_div" style="display:none;">
-        <div id="achievements"></div>
-    </div>
-
-    <div class="tab_div" id="messages_div" style="display:none;">
-        <div id="messages" style="text-align: left;"></div>
-    </div>
-
     <div class="tab_div w_div" id="misc_div" style="display:none;">
         <div class="pull_left space_left">
             <h3>Instructions</h3>
@@ -185,58 +177,6 @@ $(document).ready(function() {
                 <li>Sell meth</li>
                 <li>Buy stuff with your drug money</li>
             </ol>
-        </div>
-
-        <div class="pull_left space_left">
-            <h3>Options</h3>
-                <button onclick="gm.do_reset_confirm();">Reset</button>
-                <button onclick="gm.do_reset_all_confirm();">Reset All</button>
-                <button onclick="gm.do_save();">Save</button>
-                <button onclick="gm.do_load();">Load</button>
-        </div>
-        
-        {% if not isapp %}
-        <div class="pull_left space_left">
-            <h3>Backup</h3>
-            <textarea id="impexp" style="width: 100%; height: 100px;"></textarea>
-            <br>
-            <button onclick="gm.do_export();">Create backup</button>
-            <button onclick="gm.do_import();">Import backup</button>
-        </div>
-        {% endif %}
-
-        <div class="pull_left space_left">
-            <h3>Stats</h3>
-            <ul>
-                <li>Batches cooked: <b><span id="made_widgets">0</span></b></li>
-                <li>Batches hand-cooked: <b><span id="hand_made_widgets">0</span></b></li>
-                <li>Batches sold: <b><span id="sold_widgets">0</span></b></li>
-                <li>Batches hand-sold: <b><span id="hand_sold_widgets">0</span></b></li>
-                <li>Total upgrades purchased: <b><span id="bought_upgrades">0</span></b></li>
-                <li>Total cash earned: <b>$<span id="total_cash">0</span></b></li>
-                <li>Total cash spent: <b>$<span id="total_spent">0</span></b></li> 
-                <li>Seconds spent playing: <b><span id="time_played">0</span></b></li>
-                <li>Batches made per click: <b><span id="click_make_amount">0</span></b></li>
-                <li>Batches sold per click: <b><span id="click_sell_amount">0</span></b></li>
-            </ul>    
-        </div>
-
-        <div class="pull_left space_left">
-            <h3>Credits</h3>
-            <ul>
-                <li><b>Aaron Meier</b> 
-                    - Programming and design</li>
-                <li><b>Cody Stevens</b> 
-                    - Name</li>
-                <li><b>Dustin Lee</b> 
-                    - Concept</li>
-                <li>
-                    <b>
-                        <a href="https://github.com/nullism/clickingbad" target="_blank">GitHub</a> 
-                        Contributors</b> -
-                    nullism, Pringley, atomicstack, dakotacody, csssuf, TooDumbForAName, gmmeyer, paac, jwalt333
-                </li>
-            </ul>
         </div>
 
         <div class="clear"></div>
