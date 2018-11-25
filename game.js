@@ -35,11 +35,7 @@ var last_saved = 0;
 var last_click = 0;
 var last_bust = 0;
 var last_float = 10;
-{% if isapp %}
-var tick_ms = 250;
-{% else %}
 var tick_ms = 100;
-{% endif %}
 
 function Game() { 
 
