@@ -33,14 +33,14 @@ $(document).ready(function() {
     else if(window.navigator.msPointerEnabled) 
     {bind_type = 'touchstart click';}
 
-    $('#make_btn').bind(bind_type, function(e) 
+    $('#make_btn').bind(bind_type, function(e)) 
     { 
     gm.do_make_click();
             var this_float = e.pageX - 60;
             last_float = 1; 
     }
 
-    $('#sell_btn').bind(bind_type, function(e) 
+    $('#sell_btn').bind(bind_type, function(e)) 
     { 
         var sale = gm.do_sell_click();
         if(sale == 0) { 
