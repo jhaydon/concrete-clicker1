@@ -3037,7 +3037,7 @@ function Game() {
             var cl = pd.clickers[k];
             var template = $('#tpl_clicker').html();
             var data = {'cl':cl, 'id':k};
-            var html = Mustache.to_html(template, data);
+            //var html = Mustache.to_html(template, data);
             cs_el.prepend(html);
         }
     }
