@@ -2451,13 +2451,7 @@ function Game() {
     }
 
     this.do_make_click = function() { 
-        {% if not isapp %}
-        var nw = (new Date).getTime();
-        if((nw - last_click) < 70) { 
-            return false;
-        }
         last_click = nw;
-        {% endif %}
         var amt = this.get_click_make_amount();
         if(do_make(amt)) { 
             //message('You made '+pretty_int(pd.make_amount)+' '+pd.widgets.label);
