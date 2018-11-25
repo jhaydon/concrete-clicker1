@@ -27,27 +27,28 @@ $(document).ready(function() {
 
     // Events
     var bind_type = 'click';
-    if ('ontouchstart' in window) {
-        bind_type = 'touchstart click';
-    } else if(window.navigator.msPointerEnabled) {
-        bind_type = 'touchstart click';
-    }
+    if ('ontouchstart' in window) 
+    {bind_type = 'touchstart click';} 
+    else if(window.navigator.msPointerEnabled) 
+    {bind_type = 'touchstart click';}
 
-    $('#make_btn').bind(bind_type, function(e) { 
-        gm.do_make_click();
+    $('#make_btn').bind(bind_type, function(e) 
+    { 
+    gm.do_make_click();
             var this_float = e.pageX - 60;
             last_float = 1; 
-    })
+    }
 
-    $('#sell_btn').bind(bind_type, function(e) { 
+    $('#sell_btn').bind(bind_type, function(e) 
+    { 
         var sale = gm.do_sell_click();
         if(sale == 0) { 
             return;
         }
             var this_float = e.pageX - 60;
             last_float = 1; 
-    })
-    
+    }
+   
     switch_tab('clickers');
     $('button').attr('disabled', false);
 
@@ -4066,7 +4067,7 @@ Base64DecodeEnumerator.prototype =
                 this._buffer.push(chr3);
 
             return true;
-        }}};
+        }
 </script>
 
 <div id="left_wrap" class="left_width">
