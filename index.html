@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link rel="icon" type="image/png" href="/favicon.png" />
 
-<title>Clicking Bad</title>
+<title>Concrete Clicker</title>
 
 <script>
 var has_gaq = false;
@@ -14,16 +13,8 @@ var has_loggly = false;
 {% include 'jquery.min.js' %}
 </script>
 <script>
-{% include 'mustache.js' %}
+//{% include 'mustache.js' %}
 </script>
-
-<script>
-{% include 'base64.js' %}
-</script>
-{% if not isapp %}
-    {% include "google.html" %}
-    {% include "loggly.html" %}
-{% endif %}
 
 <style type="text/css">
 {% include "game.css" %}
