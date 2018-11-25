@@ -38,9 +38,6 @@ $(document).ready(function() {
             var this_float = e.pageX - 60;
             last_float = 1; 
         })
-        elc.animate({'top':end_y.toString()+'px', 'opacity':0, 'left':this_float.toString()+'px'}, 750, function() { 
-            $(this).remove();
-        });
     });
 
     $('#sell_btn').bind(bind_type, function(e) { 
@@ -50,11 +47,8 @@ $(document).ready(function() {
         }
             var this_float = e.pageX - 60;
             last_float = 1; 
-        })
-        elc.animate({'top':end_y.toString()+'px', 'opacity':0, 'left':this_float.toString()+'px'}, 750, function() { 
-            $(this).remove();
-        });
-
+    });
+    
     // End actions
     switch_tab('clickers');
     $('button').attr('disabled', false);
